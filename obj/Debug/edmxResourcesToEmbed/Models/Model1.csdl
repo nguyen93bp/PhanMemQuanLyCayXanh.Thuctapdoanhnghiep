@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLyCayXanhModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Buy">
+    <Key>
+      <PropertyRef Name="BuyID" />
+    </Key>
+    <Property Name="BuyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GreeneryID" Type="Int32" Nullable="false" />
+    <Property Name="Provider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Greenery" Relationship="Self.FK_Buy_Greenery" FromRole="Buy" ToRole="Greenery" />
+  </EntityType>
+  <EntityType Name="BuyF">
+    <Key>
+      <PropertyRef Name="BuyFID" />
+    </Key>
+    <Property Name="BuyFID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FertilizerID" Type="Int32" Nullable="false" />
+    <Property Name="Provider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Fertilizer" Relationship="Self.FK_BuyF_Fertilizer" FromRole="BuyF" ToRole="Fertilizer" />
+  </EntityType>
+  <EntityType Name="Fertilizer">
+    <Key>
+      <PropertyRef Name="FertilizerID" />
+    </Key>
+    <Property Name="FertilizerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nametree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Water" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fertilization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Applyingfertilizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BuyFs" Relationship="Self.FK_BuyF_Fertilizer" FromRole="Fertilizer" ToRole="BuyF" />
+  </EntityType>
+  <EntityType Name="Greenery">
+    <Key>
+      <PropertyRef Name="GreeneryID" />
+    </Key>
+    <Property Name="GreeneryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Health" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Createdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Buys" Relationship="Self.FK_Buy_Greenery" FromRole="Greenery" ToRole="Buy" />
+  </EntityType>
+  <EntityType Name="Roledetail">
+    <Key>
+      <PropertyRef Name="IDRoles" />
+    </Key>
+    <Property Name="IDRoles" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Roledetail" FromRole="Roledetail" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IDuser" />
+    </Key>
+    <Property Name="IDuser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Account" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phonenumber" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Roledetail" Relationship="Self.FK_User_Roledetail" FromRole="User" ToRole="Roledetail" />
+  </EntityType>
+  <Association Name="FK_Buy_Greenery">
+    <End Role="Greenery" Type="Self.Greenery" Multiplicity="1" />
+    <End Role="Buy" Type="Self.Buy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Greenery">
+        <PropertyRef Name="GreeneryID" />
+      </Principal>
+      <Dependent Role="Buy">
+        <PropertyRef Name="GreeneryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuyF_Fertilizer">
+    <End Role="Fertilizer" Type="Self.Fertilizer" Multiplicity="1" />
+    <End Role="BuyF" Type="Self.BuyF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fertilizer">
+        <PropertyRef Name="FertilizerID" />
+      </Principal>
+      <Dependent Role="BuyF">
+        <PropertyRef Name="FertilizerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Roledetail">
+    <End Role="Roledetail" Type="Self.Roledetail" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roledetail">
+        <PropertyRef Name="IDRoles" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuanLyCayXanhEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Buys" EntityType="Self.Buy" />
+    <EntitySet Name="BuyFs" EntityType="Self.BuyF" />
+    <EntitySet Name="Fertilizers" EntityType="Self.Fertilizer" />
+    <EntitySet Name="Greeneries" EntityType="Self.Greenery" />
+    <EntitySet Name="Roledetails" EntityType="Self.Roledetail" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Buy_Greenery" Association="Self.FK_Buy_Greenery">
+      <End Role="Greenery" EntitySet="Greeneries" />
+      <End Role="Buy" EntitySet="Buys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuyF_Fertilizer" Association="Self.FK_BuyF_Fertilizer">
+      <End Role="Fertilizer" EntitySet="Fertilizers" />
+      <End Role="BuyF" EntitySet="BuyFs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Roledetail" Association="Self.FK_User_Roledetail">
+      <End Role="Roledetail" EntitySet="Roledetails" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

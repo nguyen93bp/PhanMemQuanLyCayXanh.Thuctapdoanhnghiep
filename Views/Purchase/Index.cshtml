@@ -1,0 +1,48 @@
+﻿@model IEnumerable<QuanLyCayXanh.Models.Buy>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Quản Lý Mua Cây Xanh </h1>
+<p>
+    @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Thông kê", "ExportToPdf", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Tên Cây Xanh</th>
+                <th>Số lượng</th>
+                <th>Nhà cung cấp</th>
+                <th>Ngày mua</th>
+                <th>Giá tiền</th>
+                <th>Hình Ảnh</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Greenery.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Provider)</td>
+                    <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @((item.Price * item.Quantity).ToString("N0") + " ₫")
+                    </td>
+                    <td>
+
+                        <img src="~/Images/@item.Image" alt="Hình ảnh" width="50" height="50" />
+                    </td>
+                    <td width="180">
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.BuyID }, new { @class = "btn btn-outline-primary btn-sm mr-1" })
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.BuyID }, new { @class = "btn btn-outline-info btn-sm mr-1" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.BuyID }, new { @class = "btn btn-outline-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,65 @@
+﻿@model QuanLyCayXanh.Models.Buy
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xóa Cây Xanh</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                Tên cây:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Greenery.Name)
+            </dd>
+
+            <dt class="col-sm-3">
+                Nhà cung cấp:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Provider)
+            </dd>
+
+            <dt class="col-sm-3">
+                Số lượng:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+
+            <dt class="col-sm-3">
+                Ngày:
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Date.ToString("dd/MM/yyyy")
+            </dd>
+
+            <dt class="col-sm-3">
+                Giá tiền:
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.Price.ToString("N0") + " ₫")
+            </dd>
+
+            <dt class="col-sm-3">
+                Ảnh minh họa:
+            </dt>
+            <dd class="col-sm-9">
+                <img src="~/Images/@Model.Image" class="img-thumbnail" style="max-width: 100px; max-height: 100px;" />
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="mt-3">
+                <input type="submit" value="Xóa" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa cây xanh này không?');" /> |
+                @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        }
+    </div>
+</div>

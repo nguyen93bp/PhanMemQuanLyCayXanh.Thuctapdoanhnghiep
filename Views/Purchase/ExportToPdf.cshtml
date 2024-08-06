@@ -1,0 +1,54 @@
+﻿@model List<QuanLyCayXanh.Models.Buy>
+
+@{
+    ViewBag.Title = "Export to PDF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Tính tổng giá trị phân bón
+    decimal totalPrice = Model.Sum(b => b.Price * b.Quantity);
+}
+<form action="@Url.Action("GeneratePdf", "Purchase")" method="post">
+    <button type="submit" class="btn btn-primary">Xuất báo cáo PDF</button> |
+    @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-outline-dark ml-2" })
+</form>
+
+<p>
+    <strong>Tổng loại cây:</strong> @ViewBag.TotalTypes<br />
+    <strong>Tổng số lượng:</strong> @ViewBag.TotalQuantity<br />
+    <strong>Tổng giá trị cây xanh:</strong> @String.Format("{0:0,0} ₫", totalPrice)
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên Cây Xanh</th>
+            <th>Số lượng</th>
+            <th>Nhà cung cấp</th>
+            <th>Ngày mua</th>
+            <th>Giá tiền</th>
+            <th>Hình Ảnh</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var buy in Model)
+        {
+            <tr>
+                <td>@buy.Greenery.Name</td>
+                <td>@buy.Quantity</td>
+                <td>@buy.Provider</td>
+                <td>@buy.Date.ToString("dd-MM-yyyy")</td>
+                <td>@(buy.Price.ToString("N0") + " ₫")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(buy.Image))
+                    {
+                        <img src="@Url.Content("~/Images/" + buy.Image)" alt="Purchase Image" style="max-width: 80px; max-height: 80px;" />
+                    }
+                    else
+                    {
+                        <span>Không có ảnh</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

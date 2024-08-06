@@ -1,0 +1,48 @@
+﻿@model List<QuanLyCayXanh.Models.BuyF>
+
+@{
+    ViewBag.Title = "Export to PDF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Tính tổng số lượng phân bón
+    int totalQuantity = Model.Sum(b => b.Quantity);
+
+    // Tính tổng số lần mua
+    int totalCount = Model.Count();
+
+    // Tính tổng giá trị phân bón
+    decimal totalPrice = Model.Sum(b => b.Quantity * b.Price);
+}
+
+<table class="table table-bordered">
+    <thead>
+        <form action="@Url.Action("GeneratePdf", "BuyF")" method="post">
+            <button type="submit" class="btn btn-primary">Xuất báo cáo PDF</button> |
+            @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-outline-dark ml-2" })
+        </form>
+        <p>
+            <strong>Tổng số lần mua:</strong> @totalCount<br />
+            <strong>Tổng số lượng phân bón:</strong> @totalQuantity<br />
+            <strong>Tổng giá trị phân bón:</strong>  @String.Format("{0:0,0} ₫", totalPrice)
+        </p>
+        <tr>
+            <th>Tên Phân Bón</th>
+            <th>Số Lượng</th>
+            <th>Nhà Cung Cấp</th>
+            <th>Ngày</th>
+            <th>Giá Tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var buyf in Model)
+        {
+            <tr>
+                <td>@buyf.Fertilizer.Name</td> <!-- Assuming you have a navigation property named Fertilizer -->
+                <td>@buyf.Quantity</td>
+                <td>@buyf.Provider</td>
+                <td>@buyf.Date.ToString("dd-MM-yyyy")</td>
+                <td>@(buyf.Price.ToString("N0") + " ₫")</td>
+            </tr>
+        }
+    </tbody>
+</table>

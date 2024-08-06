@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLyCayXanhModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Buy">
+    <Key>
+      <PropertyRef Name="BuyID" />
+    </Key>
+    <Property Name="BuyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GreeneryID" Type="int" Nullable="false" />
+    <Property Name="Provider" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BuyF">
+    <Key>
+      <PropertyRef Name="BuyFID" />
+    </Key>
+    <Property Name="BuyFID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FertilizerID" Type="int" Nullable="false" />
+    <Property Name="Provider" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Fertilizer">
+    <Key>
+      <PropertyRef Name="FertilizerID" />
+    </Key>
+    <Property Name="FertilizerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nametree" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Water" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fertilization" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Applyingfertilizer" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Greenery">
+    <Key>
+      <PropertyRef Name="GreeneryID" />
+    </Key>
+    <Property Name="GreeneryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Health" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Createdate" Type="date" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Roledetail">
+    <Key>
+      <PropertyRef Name="IDRoles" />
+    </Key>
+    <Property Name="IDRoles" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IDuser" />
+    </Key>
+    <Property Name="IDuser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Account" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phonenumber" Type="int" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Role" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Buy_Greenery">
+    <End Role="Greenery" Type="Self.Greenery" Multiplicity="1" />
+    <End Role="Buy" Type="Self.Buy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Greenery">
+        <PropertyRef Name="GreeneryID" />
+      </Principal>
+      <Dependent Role="Buy">
+        <PropertyRef Name="GreeneryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuyF_Fertilizer">
+    <End Role="Fertilizer" Type="Self.Fertilizer" Multiplicity="1" />
+    <End Role="BuyF" Type="Self.BuyF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fertilizer">
+        <PropertyRef Name="FertilizerID" />
+      </Principal>
+      <Dependent Role="BuyF">
+        <PropertyRef Name="FertilizerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Roledetail">
+    <End Role="Roledetail" Type="Self.Roledetail" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roledetail">
+        <PropertyRef Name="IDRoles" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuanLyCayXanhModelStoreContainer">
+    <EntitySet Name="Buy" EntityType="Self.Buy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BuyF" EntityType="Self.BuyF" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fertilizer" EntityType="Self.Fertilizer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Greenery" EntityType="Self.Greenery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roledetail" EntityType="Self.Roledetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Buy_Greenery" Association="Self.FK_Buy_Greenery">
+      <End Role="Greenery" EntitySet="Greenery" />
+      <End Role="Buy" EntitySet="Buy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuyF_Fertilizer" Association="Self.FK_BuyF_Fertilizer">
+      <End Role="Fertilizer" EntitySet="Fertilizer" />
+      <End Role="BuyF" EntitySet="BuyF" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Roledetail" Association="Self.FK_User_Roledetail">
+      <End Role="Roledetail" EntitySet="Roledetail" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

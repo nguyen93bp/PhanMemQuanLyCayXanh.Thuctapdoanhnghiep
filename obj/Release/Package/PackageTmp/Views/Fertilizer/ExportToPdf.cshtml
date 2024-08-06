@@ -1,0 +1,70 @@
+﻿@model List<QuanLyCayXanh.Models.Fertilizer>
+
+@{
+    ViewBag.Title = "Export to PDF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    // Tính tổng số lượng phân bón
+    int totalQuantity = Model.Sum(f => f.Quantity);
+    if (totalQuantity == null)
+    {
+        totalQuantity = 0;
+    }
+    // Sử dụng toán tử ?? để xử lý trường hợp null
+}
+
+<table class="table table-bordered">
+    <thead>
+        <form action="@Url.Action("GeneratePdf", "Fertilizer")" method="post">
+            <button type="submit" class="btn btn-primary">Xuất báo cáo PDF</button> |
+            @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-outline-dark ml-2" }) @* Quay lại danh sách button *@
+        </form>
+        <p>
+            <strong>Tổng số lượng phân bón:</strong> @totalQuantity<br />
+            <strong>Tổng số loại phân bón:</strong> @ViewBag.TotalTypesCount<br />
+            <strong>Tổng số phân bón:</strong> @ViewBag.TotalCount
+        </p>
+        <tr>
+@* <th>ID</th>*@            
+            <th>Tên phân bón </th>
+            <th>Loại phân bón</th>
+            <th>Số Lượng</th>
+            <th>Vị Trí</th>
+            <th>Tên Cây</th>
+            <th>Số lần tưới nước</th>
+            <th>Số lần bón phân định kì</th>
+            <th>Số lượng bỏ phân</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fertilizer in Model)
+        {
+            <tr>
+                @*<td>@fertilizer.FertilizerID</td>*@
+                <td>@fertilizer.Name</td>
+                <td>@fertilizer.Type</td>
+                <td>@fertilizer.Quantity</td>
+                <td>@fertilizer.Location</td>
+                <td>@fertilizer.Nametree</td>
+                <td>@fertilizer.Water</td>
+                <td>@fertilizer.Fertilization</td>
+                <td>@fertilizer.Applyingfertilizer</td>
+               @* <td>
+                    @if (!string.IsNullOrEmpty(fertilizer.Image))
+                    {
+                        <img src="~/Images/@fertilizer.Image" width="50" height="50" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+

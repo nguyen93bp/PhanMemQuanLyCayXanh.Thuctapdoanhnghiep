@@ -1,0 +1,132 @@
+﻿@using QuanLyCayXanh.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - NHÓM 3</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        footer {
+            background-color: #FF99CC;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .navbar-nav li a {
+            color: #ffffff !important;
+        }
+
+        .body-content {
+            margin-top: 20px;
+            margin-bottom: 60px; /* Adjust margin to prevent overlap with footer */
+        }
+
+        footer p {
+            background-color: #000022; /* Màu chữ dưới  */
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+            footer p::before {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                background-color: #000022; /* Màu nền xanh lá cây đậm */
+                border-radius: 5px;
+            }
+   </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #000022; ">
+        <div class="container">
+            @Html.ActionLink("Quản Lý ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    @{
+                        User ac = (User)Session["TaiKhoan"];
+                        if (ac != null)
+                        {
+                            if (ac.Role == 0)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Quản lý cây xanh", "Index", "Greenery", null, new { @class = "nav-link" })</li>
+                                <li class="nav-item">@Html.ActionLink("Quản lý mua cây xanh", "Index", "Purchase", null, new { @class = "nav-link" })</li>
+                                <li class="nav-item">@Html.ActionLink("Quản lý phân bón cây xanh", "Index", "Fertilizer", null, new { @class = "nav-link" })</li>
+                                <li class="nav-item">@Html.ActionLink("Quản lý mua phân bón ", "Index", "BuyF", null, new { @class = "nav-link" })</li>
+                                <li class="nav-item">@Html.ActionLink("Phân Quyền", "Index", "Roles", null, new { @class = "nav-link" })</li>
+                            }
+                            else if (ac.Role == 1)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Quản lý cây xanh", "Index", "Greenery", null, new { @class = "nav-link" })</li>
+                            }
+                            else if (ac.Role == 2)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Quản lý mua cây xanh", "Index", "Purchase", null, new { @class = "nav-link" })</li>
+                            }
+                            else if (ac.Role == 3)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Quản lý phân bón cây xanh", "Index", "Fertilizer", null, new { @class = "nav-link" })</li>
+                            }
+                            else if (ac.Role == 4)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Quản lý mua phân bón ", "Index", "BuyF", null, new { @class = "nav-link" })</li>
+                            }
+                            else if (ac.Role == 5)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Quản lý cây xanh", "Index", "Greenery", null, new { @class = "nav-link" })</li>
+                                <li class="nav-item">@Html.ActionLink("Quản lý mua cây xanh", "Index", "Purchase", null, new { @class = "nav-link" })</li>
+                            }
+                            else if (ac.Role == 6)
+                            {
+                                <li class="nav-item">@Html.ActionLink("Quản lý phân bón cây xanh", "Index", "Fertilizer", null, new { @class = "nav-link" })</li>
+                                <li class="nav-item">@Html.ActionLink("Quản lý mua phân bón ", "Index", "BuyF", null, new { @class = "nav-link" })</li>
+                            }
+
+                        }
+
+                    }
+                    <li class="nav-item">@Html.ActionLink("Đăng Xuất", "Logout", "Account", null, new { @class = "nav-link" })</li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - NHÓM 3</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QuanLyCayXanhModelStoreContainer" CdmEntityContainer="QuanLyCayXanhEntities">
+    <EntitySetMapping Name="Buys">
+      <EntityTypeMapping TypeName="QuanLyCayXanhModel.Buy">
+        <MappingFragment StoreEntitySet="Buy">
+          <ScalarProperty Name="BuyID" ColumnName="BuyID" />
+          <ScalarProperty Name="GreeneryID" ColumnName="GreeneryID" />
+          <ScalarProperty Name="Provider" ColumnName="Provider" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyFs">
+      <EntityTypeMapping TypeName="QuanLyCayXanhModel.BuyF">
+        <MappingFragment StoreEntitySet="BuyF">
+          <ScalarProperty Name="BuyFID" ColumnName="BuyFID" />
+          <ScalarProperty Name="FertilizerID" ColumnName="FertilizerID" />
+          <ScalarProperty Name="Provider" ColumnName="Provider" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fertilizers">
+      <EntityTypeMapping TypeName="QuanLyCayXanhModel.Fertilizer">
+        <MappingFragment StoreEntitySet="Fertilizer">
+          <ScalarProperty Name="FertilizerID" ColumnName="FertilizerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Nametree" ColumnName="Nametree" />
+          <ScalarProperty Name="Water" ColumnName="Water" />
+          <ScalarProperty Name="Fertilization" ColumnName="Fertilization" />
+          <ScalarProperty Name="Applyingfertilizer" ColumnName="Applyingfertilizer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Greeneries">
+      <EntityTypeMapping TypeName="QuanLyCayXanhModel.Greenery">
+        <MappingFragment StoreEntitySet="Greenery">
+          <ScalarProperty Name="GreeneryID" ColumnName="GreeneryID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Health" ColumnName="Health" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Createdate" ColumnName="Createdate" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roledetails">
+      <EntityTypeMapping TypeName="QuanLyCayXanhModel.Roledetail">
+        <MappingFragment StoreEntitySet="Roledetail">
+          <ScalarProperty Name="IDRoles" ColumnName="IDRoles" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="QuanLyCayXanhModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

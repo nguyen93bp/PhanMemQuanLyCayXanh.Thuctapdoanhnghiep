@@ -1,0 +1,85 @@
+﻿@model QuanLyCayXanh.Models.Fertilizer
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin chi tiết phân bón</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                Tên phân bón:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt class="col-sm-3">
+                Loại phân bón:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+
+            <dt class="col-sm-3">
+                Số lượng:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+
+            <dt class="col-sm-3">
+                Vị trí:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+
+            @*<dt class="col-sm-3">
+                Ảnh minh họa:
+            </dt>
+            <dd class="col-sm-9">
+                <img src="~/Images/@Model.Image" class="img-thumbnail" style="max-width: 100px; max-height: 100px;" />
+            </dd>*@
+
+            <dt class="col-sm-3">
+                Tên cây:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Nametree)
+            </dd>
+
+            <dt class="col-sm-3">
+                Lượng nước:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Water)
+            </dd>
+
+            <dt class="col-sm-3">
+                Phân bón:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Fertilization)
+            </dd>
+
+            <dt class="col-sm-3">
+                Phương pháp áp dụng:
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Applyingfertilizer)
+            </dd>
+        </dl>
+
+    </div>
+</div>
+<div class="mt-3">
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.FertilizerID }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-secondary" })
+</div>
+    
+
+
+

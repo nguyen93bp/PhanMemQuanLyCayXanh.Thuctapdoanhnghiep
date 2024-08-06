@@ -1,0 +1,55 @@
+﻿@model List<QuanLyCayXanh.Models.Greenery>
+
+@{
+    ViewBag.Title = "Export to PDF";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    // Tính tổng số lượng cây trồng
+    int totalQuantity = Model.Sum(g => g.Quantity) ?? 0; // Use ?? operator to handle null case
+}
+<table class="table table-bordered">
+    <thead>
+        <form action="@Url.Action("GeneratePdf", "Greenery")" method="post">
+            <button type="submit" class="btn btn-primary">Xuất báo cáo PDF</button> |
+            @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-outline-dark ml-2" }) @* Quay lại danh sách button *@
+        </form>
+        <p>
+            <strong>Tổng số cây:</strong> @ViewBag.TotalCount<br />
+            <strong>Tổng số loại:</strong> @ViewBag.TotalTypesCount<br />
+            <strong>Tổng số lượng cây trồng:</strong> @totalQuantity
+        </p>
+        <tr>
+            <th>Tên cây</th>
+            <th>Loại cây</th>
+            <th>Tuổi</th>
+            <th>Sức khỏe</th>
+            <th>Vị trí</th>
+            <th>Hình ảnh</th>
+            <th>Ngày trồng</th>
+            <th>Số lượng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var greenery in Model)
+        {
+            <tr>
+                <td>@greenery.Name</td>
+                <td>@greenery.Type</td>
+                <td>@greenery.Age</td>
+                <td>@greenery.Health</td>
+                <td>@greenery.Location</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(greenery.Image))
+                    {
+                        <img src="@Url.Content("~/Images/" + greenery.Image)" alt="Hình ảnh" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>Không có ảnh</span>
+                    }
+                </td>
+                <td>@greenery.Createdate.ToString("dd-MM-yyyy")</td>
+                <td>@greenery.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>

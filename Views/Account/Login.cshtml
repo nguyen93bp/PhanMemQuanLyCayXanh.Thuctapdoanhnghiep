@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url("../Images/nen.jpg");
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-page {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+            position: relative; /* Để có thể điều chỉnh vị trí tương đối */
+        }
+
+        .form {
+            padding: 45px;
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #000000; /* Màu đen */
+        }
+
+        .login-icon {
+            width: 2em; /* Độ rộng của biểu tượng */
+            height: auto;
+            display: block; /* Hiển thị như block để có thể căn giữa */
+            margin: 0 auto 10px; /* Căn giữa ngang và để khoảng cách với tiêu đề */
+        }
+
+        .form-control {
+            font-family: "Roboto", sans-serif;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #000000; /* Màu đen */
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #ffffff; /* Màu trắng */
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+                background: #555555; /* Màu xám đậm */
+            }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .text-danger {
+            font-size: 0.875em;
+            color: #dc3545; /* Màu đỏ */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+            <img src="~/Images/logo.jpg"  alt="Tree Icon" class="login-icon" style="width: 200px; height: 200px;"/>
+            <h2 class="login-title">Login</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="input-group">
+                        <label for="your_name"><i class="zmdi zmdi-account"></i></label>
+                        <input type="text" name="Account" id="your_name" placeholder="Tài khoản Email" class="form-control"  />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" name="Password" id="your_pass" placeholder="Mật khẩu" class="form-control"  />
+                    </div>
+
+                    <div class="input-group">
+                        <input type="submit" value="Login" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
